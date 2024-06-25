@@ -1,9 +1,0 @@
-{
-  "workbench.colorTheme": "Monokai",
-  "[python]": {
-      "editor.defaultFormatter": "ms-python.black-formatter",
-      "editor.formatOnSave": true,
-      "editor.formatOnSaveMode": "file",
-  },
-  "terminal.integrated.scrollback": 1000000,
-}
