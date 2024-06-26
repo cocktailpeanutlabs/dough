@@ -1,9 +1,20 @@
+const path = require('path');
+
 const { virtual_env, project_dir } = require("./constants");
 
 module.exports = () => {
   const config = {
     daemon: true,
     run: [
+    	{
+        method: "shell.run",
+        params: {
+          venv: path.resolve(__dirname, project_dir, virtual_env),
+          message:
+            "python st_fix.py",
+          on: [{ event: "/http://[0-9.:]+/", done: true }],
+        },
+      },
       {
         method: "shell.run",
         params: {

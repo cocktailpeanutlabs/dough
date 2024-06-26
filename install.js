@@ -1,4 +1,6 @@
 const { execSync } = require("child_process");
+const path = require('path');
+
 const { virtual_env, project_dir } = require("./constants");
 
 function hasSudo() {
@@ -18,23 +20,14 @@ function getInstallCommand(kernel) {
   }
 
   project_requirements = [
-    "pip install -r requirements.txt",
-    "pip install -r comfy_runner/requirements.txt",
-    "pip install -r ComfyUI/requirements.txt",
+    `pip install -r ${path.resolve(__dirname, project_dir, 'requirements.txt')}`,
+    `pip install -r ${path.resolve(__dirname, project_dir, 'comfy_runner', 'requirements.txt')}`,
+    `pip install -r ${path.resolve(__dirname, project_dir, 'ComfyUI', 'requirements.txt')}`,
   ];
 
   // only handling linux and win32 for now
   if (platform == "linux") {
-    if (hasSudo()) {
-      cmd_list = [
-        "sudo apt-get update && sudo apt-get install -y libpq-dev python3.10-dev",
-      ];
-    } else {
-      cmd_list = [
-        "apt-get update && apt-get install -y libpq-dev python3.10-dev",
-      ];
-    }
-
+    cmd_list = []; // pinokio by default uses py3.10
     return combineLists(cmd_list, project_requirements);
   }
 
@@ -50,7 +43,7 @@ function getInstallCommand(kernel) {
 
   return [
     "conda install libsqlite --force-reinstall -y", // mac issue with sqlite3 package
-    "pip install -r requirements.txt",
+    `pip install -r ${path.resolve(__dirname, project_dir, 'requirements.txt')}`,
   ];
 }
 
@@ -61,7 +54,7 @@ module.exports = async (kernel) => {
         method: "shell.run",
         params: {
           message: [
-            "git clone --depth 1 -b main https://github.com/banodoco/Dough.git ${project_dir}",
+            `git clone --depth 1 -b main https://github.com/banodoco/Dough.git ${project_dir}`,
           ],
         },
       },
@@ -86,8 +79,8 @@ module.exports = async (kernel) => {
       {
         method: "fs.copy",
         params: {
-          src: project_dir + "/.env.sample",
-          dest: project_dir + "/.env",
+          src: path.resolve(__dirname, project_dir , ".env.sample"),
+          dest: path.resolve(__dirname, project_dir , ".env"),
         },
       },
       {
