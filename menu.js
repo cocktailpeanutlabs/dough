@@ -2,7 +2,8 @@ const path = require("path");
 const { virtual_env, project_dir } = require("./constants");
 
 module.exports = async (kernel, info) => {
-  const appInstalled = info.exists(project_dir, virtual_env) && info.running("install.js")
+  const appInstalled = info.exists(project_dir, virtual_env)
+  const appRunning = info.running("start.js")
 
   let menu = [];
   const start_btn = {
@@ -10,11 +11,6 @@ module.exports = async (kernel, info) => {
     icon: "fa-solid fa-desktop",
     text: "Start",
     href: "start.js",
-  }
-  const stop_btn = {
-    icon: "fa-solid fa-power-off",
-    text: "Stop",
-    href: "stop.js",
   }
   const install_btn = {
     default: true,
@@ -34,27 +30,19 @@ module.exports = async (kernel, info) => {
   }
 
   if (appInstalled) {
-    menu = [
-      start_btn,
-    ];
-
-    // app running
-    if (info.running("start.js")) {
+    if (appRunning) {
       menu = [
         start_btn,
-        stop_btn,
+      ];
+    } else {
+      menu = [
+        start_btn,
+        update_btn,
+        reset_btn
       ];
     }
-    // app stopped
-    else {
-      menu = [start_btn, update_btn, reset_btn]
-    }
-  }
-  // fresh install
-  else {
-    menu = [
-      install_btn,
-    ];
+  } else {
+    menu = [install_btn]
   }
   return menu;
 };
