@@ -1,13 +1,14 @@
 const path = require("path");
 const { virtual_env, project_dir } = require("./constants");
 
-module.exports = async (kernel) => {
-  const appInstalled =
-    (await kernel.exists(__dirname, project_dir, virtual_env)) &&
-    !(await kernel.script.running(__dirname, "install.js"));
+module.exports = async (kernel, info) => {
+  const appInstalled = info.exists(project_dir, virtual_env) && info.running("install.js")
+//    (await kernel.exists(__dirname, project_dir, virtual_env)) &&
+//    !(await kernel.script.running(__dirname, "install.js"));
 
   let menu = [];
   const start_btn = {
+  default: true,
 	icon: "fa-solid fa-desktop",
 	text: "Start",
 	href: "start.js",
@@ -18,6 +19,7 @@ module.exports = async (kernel) => {
 	href: "stop.js",
   }
   const install_btn = {
+  default: true,
 	icon: "fa-solid fa-plug",
 	text: "Install",
 	href: "install.js",
@@ -34,7 +36,8 @@ module.exports = async (kernel) => {
     ];
 
     // app running
-    if (kernel.script.running(__dirname, "start.js")) {
+    //if (kernel.script.running(__dirname, "start.js")) {
+    if (info.running("start.js")) {
       menu = [
         start_btn,
         stop_btn,
