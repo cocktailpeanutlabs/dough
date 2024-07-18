@@ -3,7 +3,6 @@ const { virtual_env, project_dir } = require("./constants");
 module.exports = async (kernel, info) => {
   let menu = [];
   const start_btn = {
-    default: true,
     icon: "fa-solid fa-desktop",
     text: "Start",
     href: "start.js",
@@ -33,6 +32,7 @@ module.exports = async (kernel, info) => {
     local = info.local("start.js")
     if (local.url) {
       web_btn = {
+        default: true,
         icon: "fa-solid fa-rocket",
         text: "Web UI",
         href: local.url,
@@ -47,6 +47,7 @@ module.exports = async (kernel, info) => {
         menu = [ start_btn ];
       }
     } else {
+      start_btn.default = true
       menu = [ start_btn, update_btn, reset_btn ];
     }
   } else {
