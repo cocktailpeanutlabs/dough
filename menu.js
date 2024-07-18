@@ -3,6 +3,7 @@ const { virtual_env, project_dir } = require("./constants");
 module.exports = async (kernel, info) => {
   let menu = [];
   const start_btn = {
+    default: true,
     icon: "fa-solid fa-desktop",
     text: "Start",
     href: "start.js",
@@ -28,7 +29,6 @@ module.exports = async (kernel, info) => {
   const appRunning = info.running("start.js")
   if (appInstalled) {
     if (appRunning) {
-      start_btn.default = true
       menu = [ start_btn ];
     } else {
       menu = [ start_btn, update_btn, reset_btn ];
