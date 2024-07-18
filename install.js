@@ -43,7 +43,7 @@ module.exports = async (kernel) => {
       {
         method: "fs.link",
         params: {
-          venv: `${project_dir}/${venv_dir}`
+          venv: `${project_dir}/${virtual_env}`
         }
       },
       {
