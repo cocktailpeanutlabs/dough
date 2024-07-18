@@ -1,7 +1,6 @@
 const { virtual_env, project_dir } = require("./constants");
 module.exports = async (kernel) => {
   const config = {
-    daemon: true,
     run: [
       {
         method: "shell.run",
