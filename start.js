@@ -11,7 +11,7 @@ module.exports = () => {
         params: {
           venv: path.resolve(__dirname, project_dir, virtual_env),
           message: "python st_fix.py",
-          on: [{ event: "/http://[0-9.:]+/", done: true }],
+          on: [{ event: "/http:\/\/[0-9.:]+/", done: true }],
         },
       },
       {
@@ -20,7 +20,7 @@ module.exports = () => {
           path: project_dir,
           venv: virtual_env,
           message: "streamlit run app.py --server.headless true --runner.fastReruns false --server.port 5500",
-          on: [{ event: "/http://[0-9.:]+/", done: true }],
+          on: [{ event: "/http:\/\/[0-9.:]+/", done: true }],
         },
       },
     ],
