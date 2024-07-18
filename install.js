@@ -34,19 +34,19 @@ module.exports = async (kernel) => {
           ]
         },
       },
-      {
-        when: "{{platform === 'win32'}}",
-        method: "shell.run",
-        params: {
-          path: project_dir,
-          venv: virtual_env,
-          message: [
-            "python.exe -m pip install --upgrade pip",
-            "pip install websocket",
-            "pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121",
-          ]
-        },
-      },
+//      {
+//        when: "{{platform === 'win32'}}",
+//        method: "shell.run",
+//        params: {
+//          path: project_dir,
+//          venv: virtual_env,
+//          message: [
+//            "python.exe -m pip install --upgrade pip",
+//            "pip install websocket",
+////            "pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121",
+//          ]
+//        },
+//      },
       {
         method: "fs.copy",
         params: {
