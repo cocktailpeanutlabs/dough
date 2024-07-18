@@ -15,7 +15,7 @@ module.exports = async (kernel) => {
         params: {
           path: project_dir,
           message: [
-            "git clone --depth 1 -b main https://github.com/peanutcocktail/comfy_runner.git",
+            "git clone --depth 1 -b main https://github.com/piyushK52/comfy_runner",
             "git clone https://github.com/comfyanonymous/ComfyUI.git",
           ],
         },
@@ -27,26 +27,12 @@ module.exports = async (kernel) => {
           venv: virtual_env,
           message: [
             "pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118",
-            "pip install {{gpu === 'nvidia' ? 'onnxruntime-gpu' : 'onnxruntime'}}",
             `pip install -r requirements.txt`,
             `pip install -r comfy_runner/requirements.txt`,
             `pip install -r ComfyUI/requirements.txt`,
           ]
         },
       },
-//      {
-//        when: "{{platform === 'win32'}}",
-//        method: "shell.run",
-//        params: {
-//          path: project_dir,
-//          venv: virtual_env,
-//          message: [
-//            "python.exe -m pip install --upgrade pip",
-//            "pip install websocket",
-////            "pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121",
-//          ]
-//        },
-//      },
       {
         method: "fs.copy",
         params: {
@@ -77,6 +63,5 @@ module.exports = async (kernel) => {
       },
     ],
   };
-
   return config;
 };
