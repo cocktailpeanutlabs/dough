@@ -1,8 +1,6 @@
 const path = require("path");
 const { virtual_env, project_dir } = require("./constants");
 module.exports = async (kernel, info) => {
-  const appInstalled = info.exists(project_dir, virtual_env)
-  const appRunning = info.running("start.js")
   let menu = [];
   const start_btn = {
     default: true,
@@ -26,9 +24,28 @@ module.exports = async (kernel, info) => {
     text: "Reset",
     href: "reset.js",
   }
+
+  const appInstalled = info.exists(project_dir, virtual_env)
+  const appRunning = info.running("start.js")
+  let web_btn
+  let local
+  if (appRunning) {
+    local = info.local("start.js")
+    if (local.url) {
+      web_btn = {
+        icon: "fa-solid fa-rocket",
+        text: "Web UI",
+        href: local.url,
+      }
+    }
+  }
   if (appInstalled) {
     if (appRunning) {
-      menu = [ start_btn ];
+      if (local && local.url) {
+        menu = [ start_btn, web_btn ];
+      } else {
+        menu = [ start_btn ];
+      }
     } else {
       menu = [ start_btn, update_btn, reset_btn ];
     }
