@@ -31,6 +31,7 @@ module.exports = async (kernel) => {
             `pip install -r requirements.txt`,
             `pip install -r comfy_runner/requirements.txt`,
             `pip install -r ComfyUI/requirements.txt`,
+            "pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118",
           ]
         },
       },
