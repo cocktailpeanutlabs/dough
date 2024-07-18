@@ -43,6 +43,12 @@ module.exports = async (kernel) => {
       {
         method: "fs.link",
         params: {
+          venv: `${project_dir}/${venv_dir}`
+        }
+      },
+      {
+        method: "fs.link",
+        params: {
           drive: {
             "checkpoints": "Dough/ComfyUI/models/checkpoints",
             "clip": "Dough/ComfyUI/models/clip",
