@@ -50,15 +50,15 @@ module.exports = async (kernel) => {
         method: "fs.link",
         params: {
           drive: {
-            "checkpoints": "Dough/ComfyUI/models/checkpoints",
-            "clip": "Dough/ComfyUI/models/clip",
-            "clip_vision": "Dough/ComfyUI/models/clip_vision",
-            "configs": "Dough/ComfyUI/models/configs",
-            "controlnet": "Dough/ComfyUI/models/controlnet",
-            "embeddings": "Dough/ComfyUI/models/embeddings",
-            "loras": "Dough/ComfyUI/models/loras",
-            "upscale_models": "Dough/ComfyUI/models/upscale_models",
-            "vae": "Dough/ComfyUI/models/vae"
+            "checkpoints": `${project_dir}/ComfyUI/models/checkpoints`,
+            "clip": `${project_dir}/ComfyUI/models/clip`,
+            "clip_vision": `${project_dir}/ComfyUI/models/clip_vision`,
+            "configs": `${project_dir}/ComfyUI/models/configs`,
+            "controlnet": `${project_dir}/ComfyUI/models/controlnet`,
+            "embeddings": `${project_dir}/ComfyUI/models/embeddings`,
+            "loras": `${project_dir}/ComfyUI/models/loras`,
+            "upscale_models": `${project_dir}/ComfyUI/models/upscale_models`,
+            "vae": `${project_dir}/ComfyUI/models/vae`
           },
           peers: [
             "https://github.com/cocktailpeanutlabs/automatic1111.git",
