@@ -27,23 +27,17 @@ module.exports = async (kernel, info) => {
 
   const appInstalled = info.exists(project_dir, virtual_env)
   const appRunning = info.running("start.js")
+  const updateRunning = info.running("update.js")
   if (appInstalled) {
     if (appRunning) {
-      const local = info.local("start.js")
-      if (local && local.url) {
-        const app_btn = {
-          default: true,
-          icon: "fa-solid fa-rocket",
-          text: "Open Web UI",
-          href: local.url,
-          popout: true
-        }
-        menu = [ app_btn, start_btn ];
-      } else {
-        menu = [ start_btn ];
-      }
+      menu = [ start_btn ];
     } else {
-      menu = [ start_btn, update_btn, reset_btn ];
+      if (updateRunning) {
+        update_btn.default = true
+        menu = [ start_btn, update_btn, reset_btn ];
+      } else {
+        menu = [ start_btn, update_btn, reset_btn ];
+      }
     }
   } else {
     menu = [install_btn]
