@@ -35,7 +35,8 @@ module.exports = async (kernel, info) => {
           default: true,
           icon: "fa-solid fa-rocket",
           text: "Open Web UI",
-          href: local.url
+          href: local.url,
+          popout: true
         }
         menu = [ app_btn, start_btn ];
       } else {
